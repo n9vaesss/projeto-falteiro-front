@@ -1,7 +1,7 @@
 import { Inter } from 'next/font/google';
 import './globals.css';
 
-import { ContextModal } from '@/context/ContextModal';
+import { ContextModal } from '../context/ContextModal';
 
 const inter = Inter({ subsets: ['latin'] });
 

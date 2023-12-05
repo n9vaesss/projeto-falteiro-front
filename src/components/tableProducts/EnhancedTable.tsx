@@ -1,7 +1,5 @@
-' use clint';
+'use client';
 
-import { useEffect, useState } from 'react';
-import axios from 'axios';
 import * as React from 'react';
 
 import { HeadCell, Data, Order } from './types';
@@ -20,7 +18,7 @@ import Paper from '@mui/material/Paper';
 import Checkbox from '@mui/material/Checkbox';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Switch from '@mui/material/Switch';
-import { findAllProducts } from '../../app/hooks/products/findAllProducts';
+import { findAllProducts } from '../../hooks/falteiro/products/findAllProducts';
 
 const headCells: readonly HeadCell[] = [
   {
