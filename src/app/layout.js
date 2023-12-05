@@ -19,7 +19,7 @@ export default function RootLayout({ children }) {
       <body className={inter.className}>
         <ContextModal>
           {children}
-          <ToastContainer autoClose={500} />
+          <ToastContainer autoClose={2000} />
         </ContextModal>
       </body>
     </html>
