@@ -18,8 +18,9 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import MailIcon from '@mui/icons-material/Mail';
+import AssignmentLateIcon from '@mui/icons-material/AssignmentLate';
+import SupervisorAccountIcon from '@mui/icons-material/SupervisorAccount';
+import { useRouter } from 'next/navigation';
 
 const drawerWidth = 240;
 
@@ -49,7 +50,6 @@ const DrawerHeader = styled('div')(({ theme }) => ({
   alignItems: 'center',
   justifyContent: 'flex-end',
   padding: theme.spacing(0, 1),
-  // necessary for content to be below app bar
   ...theme.mixins.toolbar,
 }));
 
@@ -92,7 +92,7 @@ const Drawer = styled(MuiDrawer, {
   }),
 }));
 
-export default function MiniDrawer({ children }) {
+export default function MiniDrawer({ children, title }) {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
 
@@ -103,6 +103,21 @@ export default function MiniDrawer({ children }) {
   const handleDrawerClose = () => {
     setOpen(false);
   };
+
+  const router = useRouter();
+
+  const icons = [
+    {
+      name: 'Lista do falteiro',
+      obj: <AssignmentLateIcon />,
+      path: '/falteiro',
+    },
+    {
+      name: 'Registrar usuario',
+      obj: <SupervisorAccountIcon />,
+      path: '/register',
+    },
+  ];
 
   return (
     <Box sx={{ display: 'flex' }}>
@@ -122,7 +137,7 @@ export default function MiniDrawer({ children }) {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap component="div">
-            Mini variant drawer
+            {title}
           </Typography>
         </Toolbar>
       </AppBar>
@@ -138,8 +153,13 @@ export default function MiniDrawer({ children }) {
         </DrawerHeader>
         <Divider />
         <List>
-          {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-            <ListItem key={text} disablePadding sx={{ display: 'block' }}>
+          {icons.map((icons, index) => (
+            <ListItem
+              key={icons.name}
+              disablePadding
+              sx={{ display: 'block' }}
+              onClick={() => router.push(icons.path)}
+            >
               <ListItemButton
                 sx={{
                   minHeight: 48,
@@ -154,38 +174,17 @@ export default function MiniDrawer({ children }) {
                     justifyContent: 'center',
                   }}
                 >
-                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                  {icons.obj}
                 </ListItemIcon>
-                <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
+                <ListItemText
+                  primary={icons.name}
+                  sx={{ opacity: open ? 1 : 0 }}
+                />
               </ListItemButton>
             </ListItem>
           ))}
         </List>
         <Divider />
-        <List>
-          {['All mail', 'Trash', 'Spam'].map((text, index) => (
-            <ListItem key={text} disablePadding sx={{ display: 'block' }}>
-              <ListItemButton
-                sx={{
-                  minHeight: 48,
-                  justifyContent: open ? 'initial' : 'center',
-                  px: 2.5,
-                }}
-              >
-                <ListItemIcon
-                  sx={{
-                    minWidth: 0,
-                    mr: open ? 3 : 'auto',
-                    justifyContent: 'center',
-                  }}
-                >
-                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                </ListItemIcon>
-                <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
-              </ListItemButton>
-            </ListItem>
-          ))}
-        </List>
       </Drawer>
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
         <DrawerHeader />

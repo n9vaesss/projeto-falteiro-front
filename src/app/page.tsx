@@ -1,5 +1,11 @@
 'use client';
 
+import Drawer from '../components/drawer/Drawer';
+
 export default function Home() {
-  return <div className="container m-auto"></div>;
+  return (
+    <Drawer>
+      <div></div>
+    </Drawer>
+  );
 }

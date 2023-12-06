@@ -1,7 +1,6 @@
 import { Inter } from 'next/font/google';
 import './globals.css';
-
-import { ContextModal } from '../context/ContextModal';
+import { MyContextProvider } from '../context/MyContext';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -17,10 +16,10 @@ export default function RootLayout({ children }) {
   return (
     <html lang="pt-br">
       <body className={inter.className}>
-        <ContextModal>
+        <MyContextProvider>
           {children}
           <ToastContainer autoClose={2000} />
-        </ContextModal>
+        </MyContextProvider>
       </body>
     </html>
   );

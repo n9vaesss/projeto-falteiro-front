@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect } from 'react';
+import React from 'react';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Tooltip from '@mui/material/Tooltip';
@@ -9,11 +9,22 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import FilterListIcon from '@mui/icons-material/FilterList';
 import { alpha } from '@mui/material/styles';
+import { useDeleteProducts } from '../../hooks/falteiro/products/deleteProducts';
 
-const EnhancedTableToolbar = ({ numSelected, teste }) => {
-  useEffect(() => {
-    console.log(teste);
-  }, [teste]);
+const EnhancedTableToolbar = ({ numSelected, property }) => {
+  const { isLoading, deleteProducts } = useDeleteProducts();
+  const [selectedCount, setSelectedCount] = React.useState(numSelected);
+
+  const handleDelete = () => {
+    deleteProducts({ ids: property });
+    setSelectedCount(0); // Reseta o valor ao clicar em deletar
+  };
+
+  React.useEffect(() => {
+    // Atualiza o estado local quando o valor de numSelected muda
+    setSelectedCount(numSelected);
+  }, [numSelected]);
+
   return (
     <Toolbar
       sx={{
@@ -28,14 +39,14 @@ const EnhancedTableToolbar = ({ numSelected, teste }) => {
         }),
       }}
     >
-      {numSelected > 0 ? (
+      {selectedCount > 0 ? (
         <Typography
           sx={{ flex: '1 1 100%' }}
           color="inherit"
           variant="subtitle1"
           component="div"
         >
-          {numSelected} selected
+          {selectedCount} selected
         </Typography>
       ) : (
         <Typography
@@ -47,18 +58,20 @@ const EnhancedTableToolbar = ({ numSelected, teste }) => {
           Products
         </Typography>
       )}
-      {numSelected > 0 ? (
+      {selectedCount > 0 ? (
         <div className="flex">
-          <Tooltip title="Delete">
+          <Tooltip title="Delete" onClick={handleDelete} disabled={isLoading}>
             <IconButton>
               <DeleteIcon />
             </IconButton>
           </Tooltip>
-          <Tooltip title="Edit">
-            <IconButton>
-              <EditIcon />
-            </IconButton>
-          </Tooltip>
+          {selectedCount === 1 ? (
+            <Tooltip title="Edit">
+              <IconButton>
+                <EditIcon />
+              </IconButton>
+            </Tooltip>
+          ) : null}
         </div>
       ) : (
         <Tooltip title="Filter list">

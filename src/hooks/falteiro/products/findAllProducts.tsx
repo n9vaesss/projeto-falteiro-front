@@ -1,7 +1,8 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import axios from 'axios';
+import { MyContext } from '../../../context/MyContext';
 
 interface Data {
   id: string;
@@ -26,7 +27,7 @@ type findAllProducts = {
 
 export const findAllProducts = () => {
   const [data, setData] = useState<Data[]>([]);
-
+  const { myState } = useContext(MyContext);
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -40,7 +41,7 @@ export const findAllProducts = () => {
     };
 
     fetchData();
-  }, []);
+  }, [myState]);
 
   return data;
 };
