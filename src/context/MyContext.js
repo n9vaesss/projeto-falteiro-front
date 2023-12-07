@@ -6,13 +6,23 @@ const MyContext = createContext();
 
 const MyContextProvider = ({ children }) => {
   const [myState, setMyState] = useState(true);
+  const [pageSelectedFalteiro, setPageSelectedFalteiro] =
+    useState('Relatorio de items');
 
   const updateState = (newValue) => {
     setMyState(newValue);
   };
 
   return (
-    <MyContext.Provider value={{ myState, updateState }}>
+    <MyContext.Provider
+      value={{
+        myState,
+        updateState,
+
+        pageSelectedFalteiro,
+        setPageSelectedFalteiro,
+      }}
+    >
       {children}
     </MyContext.Provider>
   );

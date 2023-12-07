@@ -2,6 +2,7 @@ import { useState } from 'react';
 import axios from 'axios';
 import { useContext } from 'react';
 import { MyContext } from '../../../context/MyContext';
+import { toast } from 'react-toastify';
 
 interface DeleteProductsProps {
   ids: string[];
@@ -25,10 +26,11 @@ export const useDeleteProducts = (): useDeleteProducts => {
       await Promise.all(
         ids.map(async (id) => {
           await axios.delete(`http://localhost:8080/api/products/${id}`);
+          toast.success('Item deletado!');
         }),
       );
     } catch (error) {
-      console.error('Error deleting products:', error);
+      toast.error('Algo de errado!');
       setError('Error deleting products');
     } finally {
       setIsLoading(false);

@@ -8,6 +8,14 @@
   box-sizing: border-box;
 }
 
+button{
+  background-color: color(srgb red green blue) !important;
+}
+
 .error-message{
   color: red;
+}
+
+.custom-background {
+  background-color: #1565c0;
 }

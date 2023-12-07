@@ -18,7 +18,7 @@ export default function RootLayout({ children }) {
       <body className={inter.className}>
         <MyContextProvider>
           {children}
-          <ToastContainer autoClose={2000} />
+          <ToastContainer autoClose={1800} />
         </MyContextProvider>
       </body>
     </html>

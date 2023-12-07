@@ -7,12 +7,20 @@ export interface User {
 
 export interface Data {
   id: string;
-  name: string;
-  barCode: string;
   amount: number;
   locality: string;
   entryDate: Date;
-  user: User[];
+  user: {
+    id: string;
+    name: string;
+    email: string;
+    password: string;
+  }[];
+  catalog: {
+    id: string;
+    name: string;
+    barCode: string;
+  };
 }
 
 export type Order = 'asc' | 'desc';

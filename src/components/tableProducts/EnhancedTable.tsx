@@ -29,13 +29,13 @@ const headCells: readonly HeadCell[] = [
   },
   {
     id: 'name',
-    numeric: true,
+    numeric: false,
     disablePadding: false,
     label: 'Name',
   },
   {
     id: 'barCode',
-    numeric: true,
+    numeric: false,
     disablePadding: false,
     label: 'Bar Code',
   },
@@ -47,13 +47,13 @@ const headCells: readonly HeadCell[] = [
   },
   {
     id: 'locality',
-    numeric: true,
+    numeric: false,
     disablePadding: false,
     label: 'Locality',
   },
   {
     id: 'user',
-    numeric: true,
+    numeric: false,
     disablePadding: false,
     label: 'User Name',
   },
@@ -189,11 +189,11 @@ export default function EnhancedTable() {
                     >
                       {row.id}
                     </TableCell>
-                    <TableCell align="right">{row.name}</TableCell>
-                    <TableCell align="right">{row.barCode}</TableCell>
+                    <TableCell>{row.catalog.name}</TableCell>
+                    <TableCell>{row.catalog.barCode}</TableCell>
                     <TableCell align="right">{row.amount}</TableCell>
-                    <TableCell align="right">{row.locality}</TableCell>
-                    <TableCell align="right">{row.user.name}</TableCell>
+                    <TableCell>{row.locality}</TableCell>
+                    <TableCell>{row.user.name}</TableCell>
                   </TableRow>
                 );
               })}

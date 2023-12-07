@@ -6,8 +6,6 @@ import { MyContext } from '../../../context/MyContext';
 
 interface Data {
   id: string;
-  name: string;
-  barCode: string;
   amount: number;
   locality: string;
   entryDate: Date;
@@ -17,6 +15,11 @@ interface Data {
     email: string;
     password: string;
   }[];
+  catalog: {
+    id: string;
+    name: string;
+    barCode: string;
+  };
 }
 
 type findAllProducts = {
@@ -35,6 +38,7 @@ export const findAllProducts = () => {
           'http://localhost:8080/api/products',
         );
         setData(response.data);
+        console.log(response.data);
       } catch (error) {
         console.error('Error fetching data:', error);
       }
